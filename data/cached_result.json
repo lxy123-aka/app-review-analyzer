@@ -1,0 +1,1345 @@
+{
+  "meta": {
+    "generated_at": "2026-08-20T22:33:39.227166",
+    "source": "sample_reviews.json (cached from App Store RSS)",
+    "app_id": "1357527742",
+    "analysis_goal": "识别用户最关心的功能问题与改进诉求，输出后续版本规划",
+    "note": "此文件为离线演示用缓存结果。面试官能通过此文件审查完整交付物质量。实际使用时可在 UI 中输入任意 App Store 链接重新运行。"
+  },
+  "clean_report": {
+    "raw_count": 50,
+    "duplicate_count": 0,
+    "empty_count": 0,
+    "too_short_count": 1,
+    "final_count": 49,
+    "removed_count": 1,
+    "language_distribution": {
+      "en": 46,
+      "other": 3
+    },
+    "rating_distribution": {
+      "5": 36,
+      "3": 3,
+      "4": 4,
+      "1": 6
+    },
+    "notes": [
+      "清洗完成: 原始 50 条 → 去重 0 条，空内容 0 条，过短/纯符号 1 条 → 保留 49 条（共移除 1 条）。"
+    ]
+  },
+  "analysis": {
+    "topics": [
+      {
+        "topic": "锻炼效果显著",
+        "description": "多位用户反馈通过使用该应用成功减肥、塑形，效果明显，并推荐给他人。",
+        "sentiment": "positive",
+        "review_ids": [
+          "14108243714",
+          "14102752191",
+          "14068838649",
+          "14091128893",
+          "13988699615",
+          "13909643707",
+          "13841787842",
+          "13792466057"
+        ],
+        "sample_count": 8,
+        "confidence": "medium",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "付费墙限制免费内容",
+        "description": "用户抱怨许多锻炼被标记为免费但实际需要付费，或者付费墙在几天后出现，限制了免费用户的使用体验。",
+        "sentiment": "negative",
+        "review_ids": [
+          "14099582529",
+          "14000156936",
+          "13934300886",
+          "14086122820"
+        ],
+        "sample_count": 4,
+        "confidence": "high",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "锻炼种类丰富且有趣",
+        "description": "用户赞赏应用提供多样化的锻炼类别，且锻炼过程有趣、易于坚持。",
+        "sentiment": "positive",
+        "review_ids": [
+          "14099582529",
+          "13950335410",
+          "13932118285",
+          "14086122820"
+        ],
+        "sample_count": 4,
+        "confidence": "high",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "适合女性锻炼",
+        "description": "用户认为该应用非常适合女性，尤其适合在家锻炼或日常使用。",
+        "sentiment": "positive",
+        "review_ids": [
+          "14076874170",
+          "14064618092",
+          "14013721460"
+        ],
+        "sample_count": 3,
+        "confidence": "medium",
+        "conflicting_evidence": [
+          "{'review_id': '14013721460', 'note': '认为更适合老年女性，而非年轻女性追求纤细身材'}"
+        ]
+      },
+      {
+        "topic": "音乐集成功能",
+        "description": "用户喜欢在锻炼时连接自己的音乐，提升锻炼体验。",
+        "sentiment": "positive",
+        "review_ids": [
+          "13866222112",
+          "13808498557",
+          "13828821057"
+        ],
+        "sample_count": 3,
+        "confidence": "high",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "适合初学者与身体不适者",
+        "description": "用户认为应用对初学者和对自己身体不满意的人友好，鼓励性强。",
+        "sentiment": "positive",
+        "review_ids": [
+          "13887898839",
+          "13880231725",
+          "13866222112"
+        ],
+        "sample_count": 3,
+        "confidence": "high",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "提升自信与身体满意度",
+        "description": "用户表示通过锻炼增强了自信，对身体更满意。",
+        "sentiment": "positive",
+        "review_ids": [
+          "13887898839",
+          "13880231725",
+          "13866348723"
+        ],
+        "sample_count": 3,
+        "confidence": "high",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "订阅计费与访问问题",
+        "description": "已订阅用户仍被要求订阅，或无法访问已付费的计划，需要重新订阅，且缺乏客户支持。",
+        "sentiment": "negative",
+        "review_ids": [
+          "14066840106",
+          "14029214221"
+        ],
+        "sample_count": 2,
+        "confidence": "high",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "个性化训练指导",
+        "description": "用户喜欢应用提供的个人教练和定制化锻炼计划，能感受到挑战。",
+        "sentiment": "positive",
+        "review_ids": [
+          "14097011001",
+          "13950335410"
+        ],
+        "sample_count": 2,
+        "confidence": "medium",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "强制订阅与意外扣费",
+        "description": "用户反映应用未经同意强制订阅并扣费超过60美元，且无法在应用内联系客服或更改设置。",
+        "sentiment": "negative",
+        "review_ids": [
+          "13872147015",
+          "13872823047"
+        ],
+        "sample_count": 2,
+        "confidence": "high",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "个性化训练计划",
+        "description": "用户称赞应用提供适合个人需求的训练计划，并可根据个人情况调整。",
+        "sentiment": "positive",
+        "review_ids": [
+          "13828821057",
+          "13808498557"
+        ],
+        "sample_count": 2,
+        "confidence": "medium",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "锻炼难度适中",
+        "description": "用户认为应用挑战性适中，不会太难也不会太简单。",
+        "sentiment": "positive",
+        "review_ids": [
+          "13866504746",
+          "13866222112"
+        ],
+        "sample_count": 2,
+        "confidence": "medium",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "应用易用性与界面友好",
+        "description": "用户觉得应用界面清晰，操作简单，容易上手。",
+        "sentiment": "positive",
+        "review_ids": [
+          "13863711312",
+          "13810970626"
+        ],
+        "sample_count": 2,
+        "confidence": "medium",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "卡路里计算不准确",
+        "description": "用户发现高级锻炼的卡路里消耗记录明显偏低，与预期不符，影响使用体验。",
+        "sentiment": "negative",
+        "review_ids": [
+          "14091128893"
+        ],
+        "sample_count": 1,
+        "confidence": "medium",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "广告干扰订阅用户",
+        "description": "已订阅用户仍看到广告，引起不满。",
+        "sentiment": "negative",
+        "review_ids": [
+          "14029214221"
+        ],
+        "sample_count": 1,
+        "confidence": "medium",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "免费功能变付费",
+        "description": "用户抱怨原本免费的增肌计划在3天后要求付费，感到被欺骗。",
+        "sentiment": "negative",
+        "review_ids": [
+          "13872823047"
+        ],
+        "sample_count": 1,
+        "confidence": "medium",
+        "conflicting_evidence": []
+      },
+      {
+        "topic": "病毒警告与隐私担忧",
+        "description": "用户反映下载应用后手机显示病毒警告，并声称应用会窃取信息。",
+        "sentiment": "negative",
+        "review_ids": [
+          "13825624512"
+        ],
+        "sample_count": 1,
+        "confidence": "low",
+        "conflicting_evidence": []
+      }
+    ],
+    "per_review": [
+      {
+        "review_id": "14108243714",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "五星好评，认为锻炼效果好"
+      },
+      {
+        "review_id": "14105494899",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "感觉燃烧脂肪，预期会变瘦"
+      },
+      {
+        "review_id": "14102752191",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "两个月内瘦了很多，强烈推荐"
+      },
+      {
+        "review_id": "14099582529",
+        "primary_topic": "付费墙限制免费内容",
+        "sentiment": "negative",
+        "note": "喜欢锻炼多样性，但不喜欢付费限制"
+      },
+      {
+        "review_id": "14097615554",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "喜欢直接开始锻炼，感觉有帮助"
+      },
+      {
+        "review_id": "14097011001",
+        "primary_topic": "个性化训练指导",
+        "sentiment": "positive",
+        "note": "喜欢个人教练，能感受到挑战"
+      },
+      {
+        "review_id": "14091128893",
+        "primary_topic": "卡路里计算不准确",
+        "sentiment": "negative",
+        "note": "有效果但卡路里记录不准确"
+      },
+      {
+        "review_id": "14086122820",
+        "primary_topic": "付费墙限制免费内容",
+        "sentiment": "negative",
+        "note": "喜欢分类，但希望更多免费锻炼"
+      },
+      {
+        "review_id": "14076874170",
+        "primary_topic": "适合女性锻炼",
+        "sentiment": "positive",
+        "note": "适合日常使用，尤其对职业女性"
+      },
+      {
+        "review_id": "14072975311",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "对锻炼有帮助"
+      },
+      {
+        "review_id": "14069568197",
+        "primary_topic": "付费墙限制免费内容",
+        "sentiment": "neutral",
+        "note": "声称免费但未尝试"
+      },
+      {
+        "review_id": "14068838649",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "体重从167降到137"
+      },
+      {
+        "review_id": "14066840106",
+        "primary_topic": "订阅计费与访问问题",
+        "sentiment": "negative",
+        "note": "订阅后仍被要求订阅，无法访问已付费计划"
+      },
+      {
+        "review_id": "14064618092",
+        "primary_topic": "适合女性锻炼",
+        "sentiment": "positive",
+        "note": "对女性提升肾上腺素很好"
+      },
+      {
+        "review_id": "14054619719",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "西班牙语好评"
+      },
+      {
+        "review_id": "14032205329",
+        "primary_topic": "锻炼种类丰富且有趣",
+        "sentiment": "positive",
+        "note": "喜欢可以播放音乐"
+      },
+      {
+        "review_id": "14029214221",
+        "primary_topic": "广告干扰订阅用户",
+        "sentiment": "negative",
+        "note": "有订阅仍看到广告"
+      },
+      {
+        "review_id": "14025170463",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "喜欢应用，有帮助"
+      },
+      {
+        "review_id": "14020796599",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "帮助变瘦，为夏天做准备"
+      },
+      {
+        "review_id": "14013721460",
+        "primary_topic": "适合女性锻炼",
+        "sentiment": "neutral",
+        "note": "认为更适合老年女性，而非年轻女性追求纤细"
+      },
+      {
+        "review_id": "14000156936",
+        "primary_topic": "付费墙限制免费内容",
+        "sentiment": "negative",
+        "note": "免费锻炼被付费墙限制"
+      },
+      {
+        "review_id": "13990336785",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "帮助很大"
+      },
+      {
+        "review_id": "13988699615",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "两天就看到肚子变化"
+      },
+      {
+        "review_id": "13976399503",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "西班牙语好评"
+      },
+      {
+        "review_id": "13956965309",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "阿拉伯语好评"
+      },
+      {
+        "review_id": "13950335410",
+        "primary_topic": "个性化训练指导",
+        "sentiment": "positive",
+        "note": "13岁用户，帮助增重，锻炼灵活"
+      },
+      {
+        "review_id": "13934300886",
+        "primary_topic": "付费墙限制免费内容",
+        "sentiment": "negative",
+        "note": "不喜欢需要高级版才能做大部分锻炼"
+      },
+      {
+        "review_id": "13932118285",
+        "primary_topic": "锻炼种类丰富且有趣",
+        "sentiment": "positive",
+        "note": "热身、有氧、拉伸等锻炼很好"
+      },
+      {
+        "review_id": "13909643707",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "8天开始见效，推荐"
+      },
+      {
+        "review_id": "13889480738",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "西班牙语感谢"
+      },
+      {
+        "review_id": "13887898839",
+        "primary_topic": "适合初学者与身体不适者",
+        "sentiment": "positive",
+        "note": "用户认为应用对自我身体不适的人有帮助，鼓励自我提升。"
+      },
+      {
+        "review_id": "13884089327",
+        "primary_topic": "应用易用性与界面友好",
+        "sentiment": "positive",
+        "note": "阿拉伯语评论，表示应用很好。"
+      },
+      {
+        "review_id": "13880231725",
+        "primary_topic": "提升自信与身体满意度",
+        "sentiment": "positive",
+        "note": "用户感到锻炼后不再被嘲笑，自我感觉更好。"
+      },
+      {
+        "review_id": "13872823047",
+        "primary_topic": "免费功能变付费",
+        "sentiment": "negative",
+        "note": "用户抱怨免费计划3天后要求付费，感到愤怒。"
+      },
+      {
+        "review_id": "13872147015",
+        "primary_topic": "强制订阅与意外扣费",
+        "sentiment": "negative",
+        "note": "用户被强制订阅扣费60美元，无法联系客服。"
+      },
+      {
+        "review_id": "13866504746",
+        "primary_topic": "锻炼难度适中",
+        "sentiment": "positive",
+        "note": "用户喜欢第一个挑战，完成了它。"
+      },
+      {
+        "review_id": "13866348723",
+        "primary_topic": "提升自信与身体满意度",
+        "sentiment": "positive",
+        "note": "用户喜欢应用，帮助建立日常锻炼并增强自信。"
+      },
+      {
+        "review_id": "13866222112",
+        "primary_topic": "音乐集成功能",
+        "sentiment": "positive",
+        "note": "用户喜欢音乐连接功能，且应用免费。"
+      },
+      {
+        "review_id": "13866128824",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "用户推荐应用，认为有效。"
+      },
+      {
+        "review_id": "13866106656",
+        "primary_topic": "应用易用性与界面友好",
+        "sentiment": "positive",
+        "note": "用户简单表达喜爱。"
+      },
+      {
+        "review_id": "13863711312",
+        "primary_topic": "应用易用性与界面友好",
+        "sentiment": "positive",
+        "note": "俄语评论，表示锻炼愉快，界面清晰。"
+      },
+      {
+        "review_id": "13855894739",
+        "primary_topic": "应用易用性与界面友好",
+        "sentiment": "positive",
+        "note": "用户表达喜爱。"
+      },
+      {
+        "review_id": "13841787842",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "用户声称一天内看到腹肌变化，效果显著。"
+      },
+      {
+        "review_id": "13828821057",
+        "primary_topic": "个性化训练计划",
+        "sentiment": "positive",
+        "note": "用户喜欢个性化训练和音乐功能。"
+      },
+      {
+        "review_id": "13825624512",
+        "primary_topic": "病毒警告与隐私担忧",
+        "sentiment": "negative",
+        "note": "用户声称应用导致病毒警告并可能窃取信息。"
+      },
+      {
+        "review_id": "13810970626",
+        "primary_topic": "应用易用性与界面友好",
+        "sentiment": "positive",
+        "note": "用户喜欢内容，并能在家里锻炼。"
+      },
+      {
+        "review_id": "13808498557",
+        "primary_topic": "音乐集成功能",
+        "sentiment": "positive",
+        "note": "用户喜欢锻炼时听音乐，训练计划适合自己。"
+      },
+      {
+        "review_id": "13801700674",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "用户计划每天使用直到变瘦。"
+      },
+      {
+        "review_id": "13792466057",
+        "primary_topic": "锻炼效果显著",
+        "sentiment": "positive",
+        "note": "用户第一天就看到变化，推荐应用。"
+      }
+    ],
+    "review_count": 49,
+    "batches": 2,
+    "notes": [
+      "共发现 17 个主题，覆盖 49 条评论标签。"
+    ],
+    "evidence_evaluation": {
+      "锻炼效果显著": "样本数 8；置信度 medium；证据充分。",
+      "付费墙限制免费内容": "样本数 4；置信度 high；证据中等。",
+      "锻炼种类丰富且有趣": "样本数 4；置信度 high；证据中等。",
+      "适合女性锻炼": "样本数 3；存在 1 条矛盾反馈；置信度 medium；证据中等。",
+      "音乐集成功能": "样本数 3；置信度 high；证据中等。",
+      "适合初学者与身体不适者": "样本数 3；置信度 high；证据中等。",
+      "提升自信与身体满意度": "样本数 3；置信度 high；证据中等。",
+      "订阅计费与访问问题": "样本数 2；置信度 high；证据偏少。",
+      "个性化训练指导": "样本数 2；置信度 medium；证据偏少。",
+      "强制订阅与意外扣费": "样本数 2；置信度 high；证据偏少。",
+      "个性化训练计划": "样本数 2；置信度 medium；证据偏少。",
+      "锻炼难度适中": "样本数 2；置信度 medium；证据偏少。",
+      "应用易用性与界面友好": "样本数 2；置信度 medium；证据偏少。",
+      "卡路里计算不准确": "样本数 1；置信度 medium；证据偏少。",
+      "广告干扰订阅用户": "样本数 1；置信度 medium；证据偏少。",
+      "免费功能变付费": "样本数 1；置信度 medium；证据偏少。",
+      "病毒警告与隐私担忧": "样本数 1；置信度 low；证据偏少。"
+    }
+  },
+  "prd": {
+    "problem_summary": "用户反馈主要围绕付费墙限制、订阅计费问题、广告干扰、卡路里计算不准确等负面体验，同时正面反馈集中在锻炼效果、内容丰富性、适合初学者等方面。需优先解决付费与订阅问题，提升用户体验。",
+    "requirements": [
+      {
+        "req_id": "R1",
+        "title": "优化免费内容与付费墙提示",
+        "description": "确保标记为免费的内容在合理时长内可免费使用，付费墙出现前明确提示，避免用户感到被欺骗。",
+        "priority": "P0",
+        "source_topic": "付费墙限制免费内容",
+        "source_review_ids": [
+          "14099582529",
+          "14000156936",
+          "13934300886",
+          "14086122820"
+        ],
+        "acceptance_criteria": "免费内容在至少7天内可完整使用，付费墙出现前有明确提示，用户投诉减少。",
+        "confidence": "high"
+      },
+      {
+        "req_id": "R2",
+        "title": "修复订阅计费与访问问题",
+        "description": "解决已订阅用户仍被要求订阅、无法访问已付费计划、重复扣费等问题，并提供客户支持渠道。",
+        "priority": "P0",
+        "source_topic": "订阅计费与访问问题",
+        "source_review_ids": [
+          "14066840106",
+          "14029214221"
+        ],
+        "acceptance_criteria": "已订阅用户可正常访问所有付费内容，无重复扣费，支持渠道响应及时。",
+        "confidence": "high"
+      },
+      {
+        "req_id": "R9",
+        "title": "提供客户支持渠道",
+        "description": "在应用内提供联系客服的入口，解决用户无法联系客服的问题。",
+        "priority": "P0",
+        "source_topic": "强制订阅与意外扣费",
+        "source_review_ids": [
+          "13872147015",
+          "13872823047"
+        ],
+        "acceptance_criteria": "应用内可联系客服，客服响应时间不超过24小时。",
+        "confidence": "high"
+      },
+      {
+        "req_id": "R3",
+        "title": "移除订阅用户的广告",
+        "description": "确保已订阅用户不再看到任何广告，提升订阅价值。",
+        "priority": "P1",
+        "source_topic": "广告干扰订阅用户",
+        "source_review_ids": [
+          "14029214221"
+        ],
+        "acceptance_criteria": "订阅用户在所有界面无广告展示。",
+        "confidence": "medium"
+      },
+      {
+        "req_id": "R4",
+        "title": "改进卡路里计算准确性",
+        "description": "优化卡路里消耗算法，确保高级锻炼的卡路里记录与实际消耗相符。",
+        "priority": "P1",
+        "source_topic": "卡路里计算不准确",
+        "source_review_ids": [
+          "14091128893"
+        ],
+        "acceptance_criteria": "用户反馈卡路里记录偏差在合理范围内，满意度提升。",
+        "confidence": "medium"
+      },
+      {
+        "req_id": "R5",
+        "title": "增加免费锻炼种类",
+        "description": "增加更多无需付费的锻炼项目，满足免费用户需求。",
+        "priority": "P1",
+        "source_topic": "付费墙限制免费内容",
+        "source_review_ids": [
+          "14086122820"
+        ],
+        "acceptance_criteria": "免费锻炼种类增加20%，用户投诉减少。",
+        "confidence": "medium"
+      },
+      {
+        "req_id": "R10",
+        "title": "修复病毒警告与隐私问题",
+        "description": "调查并解决用户反映的病毒警告和隐私担忧，确保应用安全。",
+        "priority": "P1",
+        "source_topic": "病毒警告与隐私担忧",
+        "source_review_ids": [
+          "13825624512"
+        ],
+        "acceptance_criteria": "应用通过安全检测，无病毒警告，用户隐私得到保护。",
+        "confidence": "low"
+      },
+      {
+        "req_id": "R6",
+        "title": "增强个性化训练计划",
+        "description": "根据用户目标（如增重、减脂）提供更精准的个性化计划，并支持调整。",
+        "priority": "P2",
+        "source_topic": "个性化训练计划",
+        "source_review_ids": [
+          "13828821057",
+          "13808498557",
+          "13950335410"
+        ],
+        "acceptance_criteria": "用户可设置目标并获得定制计划，计划可调整，用户满意度提升。",
+        "confidence": "medium"
+      },
+      {
+        "req_id": "R7",
+        "title": "优化音乐集成功能",
+        "description": "确保音乐播放功能稳定，支持更多音乐平台，提升锻炼体验。",
+        "priority": "P2",
+        "source_topic": "音乐集成功能",
+        "source_review_ids": [
+          "13866222112",
+          "13808498557",
+          "13828821057"
+        ],
+        "acceptance_criteria": "音乐功能无故障，支持主流音乐平台，用户反馈积极。",
+        "confidence": "high"
+      },
+      {
+        "req_id": "R8",
+        "title": "增加适合女性的锻炼内容",
+        "description": "针对女性用户（包括年轻女性）增加更多塑形、纤细身材的锻炼计划。",
+        "priority": "P2",
+        "source_topic": "适合女性锻炼",
+        "source_review_ids": [
+          "14076874170",
+          "14064618092",
+          "14013721460"
+        ],
+        "acceptance_criteria": "新增至少5个女性专属锻炼计划，用户反馈改善。",
+        "confidence": "medium"
+      }
+    ],
+    "version_plan": [
+      {
+        "version": "v1.0",
+        "goal": "解决付费与订阅问题，提升用户信任",
+        "scope": "优先修复订阅计费、强制订阅、广告干扰、客户支持缺失等紧急问题，并优化免费内容提示。",
+        "req_ids": [
+          "R1",
+          "R2",
+          "R3",
+          "R9"
+        ],
+        "rationale": "这些问题是用户负面反馈最集中、影响最严重的，必须优先解决以挽回用户信任。"
+      },
+      {
+        "version": "v1.1",
+        "goal": "提升锻炼体验与内容质量",
+        "scope": "改进卡路里计算、增加免费锻炼种类、优化音乐集成、增加女性内容，并增强个性化计划。",
+        "req_ids": [
+          "R4",
+          "R5",
+          "R6",
+          "R7",
+          "R8"
+        ],
+        "rationale": "在解决基础问题后，通过功能优化提升用户满意度，增强竞争力。"
+      },
+      {
+        "version": "v1.2",
+        "goal": "解决安全与隐私问题",
+        "scope": "调查并修复病毒警告问题，确保应用安全，消除用户顾虑。",
+        "req_ids": [
+          "R10"
+        ],
+        "rationale": "安全问题影响用户信任，需尽快处理，但优先级低于付费问题。"
+      }
+    ],
+    "notes": [
+      "生成 10 条需求，3 个版本规划。"
+    ]
+  },
+  "test_suite": {
+    "test_cases": [
+      {
+        "case_id": "TC-R1-01",
+        "req_id": "R1",
+        "title": "验证免费内容在7天内可完整使用",
+        "preconditions": "用户未订阅，首次下载应用",
+        "steps": [
+          "下载并安装应用",
+          "注册新账户",
+          "浏览免费内容列表",
+          "选择标记为免费的内容并开始使用",
+          "连续7天每天使用该免费内容"
+        ],
+        "expected_result": "免费内容在7天内无付费墙出现，可完整使用",
+        "source_review_ids": [
+          "14099582529",
+          "14000156936",
+          "13934300886",
+          "14086122820"
+        ],
+        "type": "functional",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R1-02",
+        "req_id": "R1",
+        "title": "验证付费墙出现前有明确提示",
+        "preconditions": "用户未订阅，使用免费内容超过7天",
+        "steps": [
+          "使用免费内容超过7天",
+          "尝试继续使用该内容",
+          "观察付费墙出现前的提示"
+        ],
+        "expected_result": "付费墙出现前有明确提示，告知用户需订阅才能继续使用",
+        "source_review_ids": [
+          "14000156936",
+          "13934300886"
+        ],
+        "type": "edge_case",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R2-01",
+        "req_id": "R2",
+        "title": "验证已订阅用户可正常访问付费内容",
+        "preconditions": "用户已订阅，账户有效",
+        "steps": [
+          "使用已订阅账户登录",
+          "访问任意付费内容",
+          "尝试使用付费功能"
+        ],
+        "expected_result": "已订阅用户可正常访问所有付费内容，无订阅提示",
+        "source_review_ids": [
+          "14066840106"
+        ],
+        "type": "functional",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R2-02",
+        "req_id": "R2",
+        "title": "验证无重复扣费",
+        "preconditions": "用户已订阅，订阅周期内",
+        "steps": [
+          "检查订阅状态",
+          "查看支付记录",
+          "确认订阅周期内无重复扣费"
+        ],
+        "expected_result": "订阅周期内无重复扣费记录",
+        "source_review_ids": [
+          "14066840106"
+        ],
+        "type": "regression",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R2-03",
+        "req_id": "R2",
+        "title": "验证订阅用户无需重新订阅",
+        "preconditions": "用户已订阅，但应用提示需要订阅",
+        "steps": [
+          "使用已订阅账户登录",
+          "尝试访问付费内容",
+          "观察是否出现订阅提示"
+        ],
+        "expected_result": "已订阅用户不会看到订阅提示，可正常访问",
+        "source_review_ids": [
+          "14066840106"
+        ],
+        "type": "functional",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R9-01",
+        "req_id": "R9",
+        "title": "验证应用内提供客服入口",
+        "preconditions": "应用已安装，用户已登录",
+        "steps": [
+          "打开应用",
+          "进入设置或帮助页面",
+          "查找联系客服入口"
+        ],
+        "expected_result": "应用内可找到联系客服的入口",
+        "source_review_ids": [
+          "13872147015",
+          "13872823047"
+        ],
+        "type": "functional",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R9-02",
+        "req_id": "R9",
+        "title": "验证客服响应时间不超过24小时",
+        "preconditions": "用户已提交客服请求",
+        "steps": [
+          "通过客服入口提交问题",
+          "记录提交时间",
+          "等待客服响应"
+        ],
+        "expected_result": "客服在24小时内响应",
+        "source_review_ids": [
+          "13872147015",
+          "13872823047"
+        ],
+        "type": "functional",
+        "confidence": "medium"
+      },
+      {
+        "case_id": "TC-R3-01",
+        "req_id": "R3",
+        "title": "验证订阅用户无广告",
+        "preconditions": "用户已订阅，应用已登录",
+        "steps": [
+          "使用已订阅账户登录",
+          "浏览应用各个界面（首页、锻炼、设置等）",
+          "观察是否有广告展示"
+        ],
+        "expected_result": "订阅用户在所有界面无广告展示",
+        "source_review_ids": [
+          "14029214221"
+        ],
+        "type": "functional",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R4-01",
+        "req_id": "R4",
+        "title": "验证卡路里计算准确性",
+        "preconditions": "用户已完成一次高级锻炼",
+        "steps": [
+          "完成一次高级锻炼",
+          "记录应用显示的卡路里消耗",
+          "对比实际消耗（如使用心率监测设备）"
+        ],
+        "expected_result": "卡路里记录偏差在合理范围内（如±10%）",
+        "source_review_ids": [
+          "14091128893"
+        ],
+        "type": "functional",
+        "confidence": "medium"
+      },
+      {
+        "case_id": "TC-R5-01",
+        "req_id": "R5",
+        "title": "验证免费锻炼种类增加",
+        "preconditions": "应用已更新至最新版本",
+        "steps": [
+          "打开应用",
+          "浏览免费锻炼列表",
+          "统计免费锻炼种类数量"
+        ],
+        "expected_result": "免费锻炼种类比之前增加20%",
+        "source_review_ids": [
+          "14086122820"
+        ],
+        "type": "regression",
+        "confidence": "medium"
+      },
+      {
+        "case_id": "TC-R10-01",
+        "req_id": "R10",
+        "title": "验证应用无病毒警告",
+        "preconditions": "应用已安装，设备安全软件已开启",
+        "steps": [
+          "下载并安装应用",
+          "运行安全扫描",
+          "检查是否有病毒警告"
+        ],
+        "expected_result": "应用通过安全检测，无病毒警告",
+        "source_review_ids": [
+          "13825624512"
+        ],
+        "type": "functional",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R10-02",
+        "req_id": "R10",
+        "title": "验证用户隐私得到保护",
+        "preconditions": "应用已安装，用户已登录",
+        "steps": [
+          "查看应用隐私政策",
+          "检查应用请求的权限",
+          "确认无过度收集个人信息"
+        ],
+        "expected_result": "应用隐私政策明确，权限合理，无隐私泄露风险",
+        "source_review_ids": [
+          "13825624512"
+        ],
+        "type": "functional",
+        "confidence": "medium"
+      },
+      {
+        "case_id": "TC-R6-01",
+        "req_id": "R6",
+        "title": "验证用户可设置目标并获得定制计划",
+        "preconditions": "用户已登录，未设置目标",
+        "steps": [
+          "打开应用",
+          "进入个人设置",
+          "设置目标（如增重、减脂）",
+          "查看生成的个性化计划"
+        ],
+        "expected_result": "应用根据目标生成定制计划",
+        "source_review_ids": [
+          "13828821057",
+          "13808498557",
+          "13950335410"
+        ],
+        "type": "functional",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R6-02",
+        "req_id": "R6",
+        "title": "验证个性化计划可调整",
+        "preconditions": "用户已有定制计划",
+        "steps": [
+          "打开定制计划",
+          "尝试调整计划（如修改锻炼时长、难度）",
+          "保存调整"
+        ],
+        "expected_result": "计划可调整并保存",
+        "source_review_ids": [
+          "13828821057",
+          "13808498557",
+          "13950335410"
+        ],
+        "type": "functional",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R7-01",
+        "req_id": "R7",
+        "title": "验证音乐播放功能稳定",
+        "preconditions": "用户已登录，设备已连接网络",
+        "steps": [
+          "打开应用",
+          "进入锻炼界面",
+          "启动音乐播放功能",
+          "播放音乐并完成一次锻炼"
+        ],
+        "expected_result": "音乐播放无故障，锻炼过程中音乐持续播放",
+        "source_review_ids": [
+          "13866222112",
+          "13808498557",
+          "13828821057"
+        ],
+        "type": "functional",
+        "confidence": "high"
+      },
+      {
+        "case_id": "TC-R7-02",
+        "req_id": "R7",
+        "title": "验证支持主流音乐平台",
+        "preconditions": "用户已登录，设备已安装主流音乐应用",
+        "steps": [
+          "打开应用",
+          "进入音乐集成设置",
+          "查看支持的平台列表",
+          "尝试连接Spotify、Apple Music等"
+        ],
+        "expected_result": "支持主流音乐平台，连接成功",
+        "source_review_ids": [
+          "13866222112",
+          "13808498557",
+          "13828821057"
+        ],
+        "type": "functional",
+        "confidence": "medium"
+      },
+      {
+        "case_id": "TC-R8-01",
+        "req_id": "R8",
+        "title": "验证新增女性专属锻炼计划",
+        "preconditions": "应用已更新至最新版本",
+        "steps": [
+          "打开应用",
+          "浏览锻炼计划列表",
+          "筛选女性专属计划",
+          "统计数量"
+        ],
+        "expected_result": "新增至少5个女性专属锻炼计划",
+        "source_review_ids": [
+          "14076874170",
+          "14064618092",
+          "14013721460"
+        ],
+        "type": "functional",
+        "confidence": "high"
+      }
+    ],
+    "notes": [
+      "共生成 17 条测试用例。"
+    ]
+  },
+  "validation": {
+    "total": 27,
+    "passed": 27,
+    "failed": 0,
+    "pass_rate": 100.0,
+    "items": [
+      {
+        "target": "R1",
+        "target_type": "requirement",
+        "passed": true,
+        "reason": "需求有 4 条评论证据支撑。",
+        "related_ids": [
+          "14099582529",
+          "14000156936",
+          "13934300886",
+          "14086122820"
+        ]
+      },
+      {
+        "target": "R2",
+        "target_type": "requirement",
+        "passed": true,
+        "reason": "需求有 2 条评论证据支撑。",
+        "related_ids": [
+          "14066840106",
+          "14029214221"
+        ]
+      },
+      {
+        "target": "R9",
+        "target_type": "requirement",
+        "passed": true,
+        "reason": "需求有 2 条评论证据支撑。",
+        "related_ids": [
+          "13872147015",
+          "13872823047"
+        ]
+      },
+      {
+        "target": "R3",
+        "target_type": "requirement",
+        "passed": true,
+        "reason": "需求有 1 条评论证据支撑。",
+        "related_ids": [
+          "14029214221"
+        ]
+      },
+      {
+        "target": "R4",
+        "target_type": "requirement",
+        "passed": true,
+        "reason": "需求有 1 条评论证据支撑。",
+        "related_ids": [
+          "14091128893"
+        ]
+      },
+      {
+        "target": "R5",
+        "target_type": "requirement",
+        "passed": true,
+        "reason": "需求有 1 条评论证据支撑。",
+        "related_ids": [
+          "14086122820"
+        ]
+      },
+      {
+        "target": "R10",
+        "target_type": "requirement",
+        "passed": true,
+        "reason": "需求有 1 条评论证据支撑。",
+        "related_ids": [
+          "13825624512"
+        ]
+      },
+      {
+        "target": "R6",
+        "target_type": "requirement",
+        "passed": true,
+        "reason": "需求有 3 条评论证据支撑。",
+        "related_ids": [
+          "13828821057",
+          "13808498557",
+          "13950335410"
+        ]
+      },
+      {
+        "target": "R7",
+        "target_type": "requirement",
+        "passed": true,
+        "reason": "需求有 3 条评论证据支撑。",
+        "related_ids": [
+          "13866222112",
+          "13808498557",
+          "13828821057"
+        ]
+      },
+      {
+        "target": "R8",
+        "target_type": "requirement",
+        "passed": true,
+        "reason": "需求有 3 条评论证据支撑。",
+        "related_ids": [
+          "14076874170",
+          "14064618092",
+          "14013721460"
+        ]
+      },
+      {
+        "target": "TC-R1-01",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R1，且有 4 条评论证据。",
+        "related_ids": [
+          "14099582529",
+          "14000156936",
+          "13934300886",
+          "14086122820"
+        ]
+      },
+      {
+        "target": "TC-R1-02",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R1，且有 2 条评论证据。",
+        "related_ids": [
+          "14000156936",
+          "13934300886"
+        ]
+      },
+      {
+        "target": "TC-R2-01",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R2，且有 1 条评论证据。",
+        "related_ids": [
+          "14066840106"
+        ]
+      },
+      {
+        "target": "TC-R2-02",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R2，且有 1 条评论证据。",
+        "related_ids": [
+          "14066840106"
+        ]
+      },
+      {
+        "target": "TC-R2-03",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R2，且有 1 条评论证据。",
+        "related_ids": [
+          "14066840106"
+        ]
+      },
+      {
+        "target": "TC-R9-01",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R9，且有 2 条评论证据。",
+        "related_ids": [
+          "13872147015",
+          "13872823047"
+        ]
+      },
+      {
+        "target": "TC-R9-02",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R9，且有 2 条评论证据。",
+        "related_ids": [
+          "13872147015",
+          "13872823047"
+        ]
+      },
+      {
+        "target": "TC-R3-01",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R3，且有 1 条评论证据。",
+        "related_ids": [
+          "14029214221"
+        ]
+      },
+      {
+        "target": "TC-R4-01",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R4，且有 1 条评论证据。",
+        "related_ids": [
+          "14091128893"
+        ]
+      },
+      {
+        "target": "TC-R5-01",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R5，且有 1 条评论证据。",
+        "related_ids": [
+          "14086122820"
+        ]
+      },
+      {
+        "target": "TC-R10-01",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R10，且有 1 条评论证据。",
+        "related_ids": [
+          "13825624512"
+        ]
+      },
+      {
+        "target": "TC-R10-02",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R10，且有 1 条评论证据。",
+        "related_ids": [
+          "13825624512"
+        ]
+      },
+      {
+        "target": "TC-R6-01",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R6，且有 3 条评论证据。",
+        "related_ids": [
+          "13828821057",
+          "13808498557",
+          "13950335410"
+        ]
+      },
+      {
+        "target": "TC-R6-02",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R6，且有 3 条评论证据。",
+        "related_ids": [
+          "13828821057",
+          "13808498557",
+          "13950335410"
+        ]
+      },
+      {
+        "target": "TC-R7-01",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R7，且有 3 条评论证据。",
+        "related_ids": [
+          "13866222112",
+          "13808498557",
+          "13828821057"
+        ]
+      },
+      {
+        "target": "TC-R7-02",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R7，且有 3 条评论证据。",
+        "related_ids": [
+          "13866222112",
+          "13808498557",
+          "13828821057"
+        ]
+      },
+      {
+        "target": "TC-R8-01",
+        "target_type": "test_case",
+        "passed": true,
+        "reason": "测试用例关联需求 R8，且有 3 条评论证据。",
+        "related_ids": [
+          "14076874170",
+          "14064618092",
+          "14013721460"
+        ]
+      }
+    ],
+    "assumed_conclusions": [],
+    "notes": [
+      "共验证 27 项，通过 27 项，未通过 0 项，通过率 100.0%。"
+    ]
+  }
+}
