@@ -1,0 +1,44 @@
+# ---------- 环境与密钥 ----------
+.env
+.env.local
+.env.*.local
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+.installed.cfg
+*.egg
+
+# ---------- 虚拟环境 ----------
+venv/
+env/
+ENV/
+.venv/
+
+# ---------- IDE / 编辑器 ----------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ---------- 测试与覆盖率 ----------
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ---------- 运行时缓存与输出 ----------
+cache/
+output/
+*.log

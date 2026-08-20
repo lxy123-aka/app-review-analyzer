@@ -1,0 +1,23 @@
+# App Store 评论分析与版本规划工具 - Python 依赖
+# Python 3.9+
+
+# Web 前端框架（需 1.32+ 以支持 st.status 等组件）
+streamlit>=1.32.0,<2.0.0
+
+# LLM API 调用（兼容 OpenAI SDK 调用 DeepSeek 等服务）
+openai>=1.12.0,<2.0.0
+
+# 环境变量管理
+python-dotenv>=1.0.0,<2.0.0
+
+# HTTP 数据抓取
+requests>=2.31.0,<3.0.0
+
+# 数据处理
+pandas>=2.0.0,<3.0.0
+
+# LLM 返回 JSON 解析（容错）
+json-repair>=0.0.13,<1.0.0
+
+# 类型提示支持（Python 3.9 兼容）
+typing-extensions>=4.5.0
