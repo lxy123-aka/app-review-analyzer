@@ -1,22 +1,29 @@
-# ============================================================
+﻿# ============================================================
 # pipeline/validator.py
 # 职责：可追溯性验证
 #   - 验证每个 PRD 需求是否都有评论证据支撑
 #   - 验证每个测试用例是否都关联了有效需求
 #   - 无证据支撑的结论标记为"假设"或建议移除
 #   - 输出验证报告：通过率、未通过项及原因
-# 依赖：无 LLM 依赖，纯规则校验（确定性、可重复）
+#   - 可选：调用 LLM 进行语义一致性抽查
+# 依赖：核心验证无 LLM 依赖（确定性）；语义校验可选依赖 LLMClient
 # ============================================================
 """可追溯性验证模块。
 
-本模块刻意不调用 LLM，确保验证结论是确定性的、可复现的，
-符合"证据可追溯"的设计原则。
+核心验证（validate）刻意不调用 LLM，确保验证结论是确定性的、可复现的。
+语义一致性校验（semantic_consistency_check）是可选的 LLM 抽查，
+用于判断需求描述是否能从评论原文中合理推导出来。
 """
 
 from __future__ import annotations
 
 import logging
+import random
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from models.llm_client import LLMClient
 
 logger = logging.getLogger(__name__)
 
@@ -225,6 +232,129 @@ def validate(
             f"未通过 {report.failed} 项，通过率 {round(report.pass_rate, 2)}%。"
         )
     return report
+
+
+# ============================================================
+# 语义一致性校验（可选，LLM 抽查）
+# ============================================================
+
+_SEMANTIC_SYSTEM_PROMPT = """你是一位严格的需求审计员。
+
+你的任务是判断一条产品需求描述是否能从用户评论原文中合理推导出来。
+
+【规则】
+1. 只基于评论原文判断，不要被需求描述本身的合理性说服。
+2. 必须在评论中找到具体的、可引用的支撑内容。
+3. 如果评论只提到相关话题但不足以支撑需求的具体内容，判定为不通过。
+4. 严格输出 JSON，禁止附加文字。
+
+【输出 JSON 结构】
+{"passed": true/false, "reason": "简述判断依据", "confidence": "high/medium/low"}
+"""
+
+
+def _build_semantic_user_prompt(req: dict, review_texts: list[str]) -> str:
+    """构造语义校验的用户提示。"""
+    lines = [
+        "【需求信息】",
+        f'标题: {req.get("title", "")}',
+        f'描述: {req.get("description", "")}',
+        f'验收标准: {req.get("acceptance_criteria", "")}',
+        "",
+        "【对应的用户评论原文】",
+    ]
+    for i, text in enumerate(review_texts, 1):
+        lines.append(f"评论{i}: {text}")
+    lines.append("")
+    lines.append("请判断上述需求是否能从这些评论中合理推导出来。严格输出 JSON。")
+    return "\n".join(lines)
+
+
+def semantic_consistency_check(
+    prd: dict,
+    reviews: list[dict],
+    llm_client: "LLMClient",
+    *,
+    sample_size: int = 3,
+) -> list[CheckItem]:
+    """对 PRD 需求进行 LLM 语义一致性抽查。
+
+    从 prd.requirements 中随机抽取 sample_size 条需求，
+    对每条需求调用 LLM 判断其描述是否能从 source_review_ids 对应的评论原文中合理推导出来。
+
+    Args:
+        prd: PRD 字典（含 requirements）
+        reviews: 清洗后评论列表
+        llm_client: LLM 客户端实例
+        sample_size: 抽查数量
+
+    Returns:
+        未通过的 CheckItem 列表（target_type="requirement_semantic"）
+    """
+    reqs = prd.get("requirements", []) or []
+    if not reqs:
+        return []
+
+    reviews_by_id = {str(r.get("review_id")): r for r in reviews}
+    # 随机抽取，但只抽有 source_review_ids 的需求
+    candidates = [r for r in reqs if r.get("source_review_ids")]
+    if not candidates:
+        return []
+
+    sample = random.sample(
+        candidates, min(sample_size, len(candidates))
+    )
+
+    failed_items: list[CheckItem] = []
+
+    from config import settings as _settings
+    from utils.helpers import safe_json_loads
+
+    for req in sample:
+        req_id = str(req.get("req_id", ""))
+        rids = [str(x) for x in (req.get("source_review_ids") or [])
+                if str(x) in reviews_by_id]
+        if not rids:
+            continue
+
+        review_texts = [
+            str(reviews_by_id[rid].get("content", ""))[:500] for rid in rids
+        ]
+
+        messages = llm_client.build_messages(
+            _SEMANTIC_SYSTEM_PROMPT,
+            _build_semantic_user_prompt(req, review_texts),
+        )
+
+        try:
+            data = llm_client.chat_json(
+                messages,
+                temperature=0.1,
+                max_tokens=_settings.llm_max_tokens,
+            )
+        except Exception as err:
+            logger.warning("语义校验 LLM 调用失败 (req=%s): %s", req_id, err)
+            continue
+
+        if not isinstance(data, dict):
+            continue
+
+        passed = bool(data.get("passed", True))
+        reason = str(data.get("reason", ""))
+        confidence = str(data.get("confidence", "medium"))
+
+        if not passed:
+            failed_items.append(
+                CheckItem(
+                    target=req_id,
+                    target_type="requirement_semantic",
+                    passed=False,
+                    reason=f"语义校验未通过: {reason} (置信度: {confidence})",
+                    related_ids=rids,
+                )
+            )
+
+    return failed_items
 
 
 def to_markdown(report: ValidationReport) -> str:

@@ -4,7 +4,7 @@
 #   - 解析用户输入的 App Store 链接，提取 App ID 与国家
 #   - 调用 Apple 官方 RSS Feed 接口循环抓取评论
 #   - 速率限制（请求间隔 >= 1s）
-#   - 支持从本地 JSON / CSV 文件导入（离线演示与面试官测试）
+#   - 支持从本地 JSON / CSV 文件导入（离线演示与测试）
 #   - 抓取失败时抛出明确异常，绝不静默
 # 依赖：requests、config.settings、utils.url_parser、utils.helpers
 # 数据源：https://itunes.apple.com/{country}/rss/customerreviews/id={appId}/sortBy=mostRecent/page={page}/json

@@ -1,6 +1,6 @@
-﻿"""
+"""
 为笔试指定 App (id=839285684) 生成完整管线输出缓存。
-用于面试官离线审查指定 App 的分析质量。
+用于离线生成指定 App 的分析缓存，便于无网络环境下查看结果。
 """
 from __future__ import annotations
 
@@ -73,11 +73,13 @@ def main() -> None:
             "app_url": f"https://apps.apple.com/{COUNTRY}/app/id{APP_ID}",
             "analysis_goal": ANALYSIS_GOAL,
             "note": "此文件为离线演示用缓存结果（笔试指定 App）。"
-                    "面试官能通过此文件审查完整交付物质量。"
+                    "可通过此文件查看完整交付物质量。"
                     "实际使用时可在 UI 中输入任意 App Store 链接重新运行。",
         },
         "collect_report": collect_report.as_dict(),
         "clean_report": clean_report.as_dict(),
+        "reviews_raw": reviews_raw[:50],
+        "reviews_clean": cleaned,
         "analysis": analysis_dict,
         "prd": prd.as_dict(),
         "test_suite": suite.as_dict(),
@@ -88,7 +90,7 @@ def main() -> None:
         json.dump(result, f, ensure_ascii=False, indent=2, default=str)
 
     size_kb = CACHE_FILE.stat().st_size / 1024
-    print(f"\n✅ 缓存结果已保存到: {CACHE_FILE}")
+    print(f"\n[OK] 缓存结果已保存到: {CACHE_FILE}")
     print(f"   文件大小: {size_kb:.1f} KB")
 
 

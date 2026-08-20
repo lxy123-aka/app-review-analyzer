@@ -8,7 +8,7 @@
 #   - 情感分析：正面/负面/中性
 #   - 证据评估：每个主题评估证据充分性、矛盾反馈、置信度
 #   - 每个结果必须含 review_ids、样本数、置信度、矛盾证据
-#   - Prompt 全部写在代码中，便于面试官审查
+#   - Prompt 全部写在代码中，便于审查
 #   - 防幻觉：Prompt 强制 LLM 只基于提供的评论作答，
 #     不确定时明确标注，禁止编造 review_id
 # 依赖：models.LLMClient、config.settings

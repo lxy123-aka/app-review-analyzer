@@ -34,6 +34,8 @@ from pipeline import (  # noqa: E402
 
 # 缓存样本数据路径
 SAMPLE_FILE = Path(__file__).parent / "data" / "sample_reviews.json"
+# 离线完整管线缓存（笔试指定 App 839285684）
+CACHED_RESULT_FILE = Path(__file__).parent / "data" / "cached_result_app_839285684.json"
 
 
 # ============================================================
@@ -66,6 +68,11 @@ with st.expander("⚙️ 当前配置（来自 .env）", expanded=False):
         st.warning(
             f"⚠️ LLM 配置缺失：{', '.join(missing)}。请复制 `.env.example` 为 `.env` 并填入。"
         )
+        if CACHED_RESULT_FILE.exists():
+            st.info(
+                "💡 当前未配置 API Key，无法进行实时 LLM 分析。"
+                "可点击下方「📊 加载离线缓存结果」按钮查看笔试指定 App (839285684) 的完整分析示例。"
+            )
 
 
 # ============================================================
@@ -99,13 +106,16 @@ with st.container(border=True):
         help="描述你希望从评论中得到什么结论，会影响 LLM 的分析侧重",
     )
 
-    c1, c2, c3 = st.columns([1, 1, 2])
+    c1, c2, c3, c4 = st.columns([1, 1, 1, 2])
     with c1:
         start_btn = st.button("🚀 开始分析", type="primary", use_container_width=True)
     with c2:
         sample_btn = st.button("📦 加载样本数据", use_container_width=True,
                                help="使用内置的缓存样本评论演示")
     with c3:
+        cache_btn = st.button("📊 加载离线缓存结果", use_container_width=True,
+                               help="加载笔试指定 App (839285684) 的完整分析缓存，无需 API Key")
+    with c4:
         uploaded = st.file_uploader(
             "或上传本地 JSON/CSV 文件",
             type=["json", "csv"],
@@ -120,6 +130,7 @@ with st.container(border=True):
 def _reset_state() -> None:
     st.session_state["pipeline_result"] = None
     st.session_state["selected_review"] = None
+    st.session_state["is_cached"] = False
 
 
 if "pipeline_result" not in st.session_state:
@@ -212,7 +223,12 @@ def render_clean_report(report: dict) -> None:
 
 
 def render_analysis_section(analysis: dict, reviews: list[dict]) -> None:
-    """渲染分析结果，每条主题旁显示来源 review_id 可点击查看。"""
+    """渲染分析结果，每条主题旁显示来源 review_id 可点击查看。
+
+    UI 标注：
+      - 🤖 模型归纳：主题名称、描述、矛盾反馈、置信度（LLM 生成）
+      - 📊 确定性统计：样本数、review_ids、情感分布（从数据直接算出）
+    """
     topics = analysis.get("topics", [])
     if not topics:
         st.warning("未发现主题。")
@@ -221,6 +237,7 @@ def render_analysis_section(analysis: dict, reviews: list[dict]) -> None:
 
     st.caption(f"共发现 {len(topics)} 个主题，覆盖 "
                f"{analysis.get('review_count', 0)} 条评论")
+    st.caption("图例: 🤖 模型生成结论 | 📊 确定性统计（从数据直接算出）")
 
     for i, t in enumerate(topics, 1):
         sentiment = t.get("sentiment", "")
@@ -233,26 +250,32 @@ def render_analysis_section(analysis: dict, reviews: list[dict]) -> None:
         )
         with st.container(border=True):
             head_cols = st.columns([6, 2, 2, 2])
+            # 主题标题旁标注"模型归纳"徽章
             head_cols[0].markdown(
-                f"**{emoji} 主题 {i}: {t.get('topic','')}**"
+                f"**{emoji} 主题 {i}: {t.get('topic','')}** "
+                f"`🤖 模型归纳`"
             )
-            head_cols[1].markdown(f"情感: `{sentiment}`")
+            # 情感标注为确定性统计（从评论评分/关键词归类得出）
+            head_cols[1].markdown(f"📊 情感: `{sentiment}`")
+            # 置信度标注为模型生成
             head_cols[2].markdown(
-                f"置信度: :{conf_color}[`{conf}`]"
+                f"🤖 置信度: :{conf_color}[`{conf}`]"
             )
-            head_cols[3].markdown(f"样本数: `{t.get('sample_count',0)}`")
-            st.caption(t.get("description", ""))
+            # 样本数标注为确定性统计
+            head_cols[3].markdown(f"📊 样本数: `{t.get('sample_count',0)}`")
+            # 描述标注为模型生成
+            st.markdown(f"`🤖 模型生成` {t.get('description', '')}")
             if t.get("conflicting_evidence"):
-                st.warning("⚠️ 存在矛盾反馈：")
+                st.warning("`🤖 模型归纳` 存在矛盾反馈：")
                 for ce in t["conflicting_evidence"]:
                     st.markdown(f"- {ce}")
             ev = analysis.get("evidence_evaluation", {}).get(t.get("topic",""), "")
             if ev:
-                st.caption(f"证据评估: {ev}")
+                st.caption(f"📊 证据评估: {ev}")
 
             rids = t.get("review_ids", [])
             if rids:
-                st.markdown("**来源评论**（点击按钮查看原文）：")
+                st.markdown("📊 **来源评论**（点击按钮查看原文）：")
                 rcols = st.columns(min(len(rids), 5))
                 for j, rid in enumerate(rids[:10]):
                     with rcols[j % 5]:
@@ -361,11 +384,31 @@ def render_validation_section(validation: dict) -> None:
     cols[1].metric("通过", validation.get("passed", 0))
     cols[2].metric("未通过", validation.get("failed", 0))
     cols[3].metric("通过率%", validation.get("pass_rate", 0))
+
+    # 无证据支撑的结论用红色突出显示
     if validation.get("assumed_conclusions"):
-        st.error("🚫 无证据支撑的结论（建议移除或补证据）："
-                 + ", ".join(validation["assumed_conclusions"]))
+        st.error(
+            "🚫 **模型生成但无证据支撑的结论（已标记为假设）**\n\n"
+            "⚠️ 以下需求/用例的 source_review_ids 在数据中不存在或为空，"
+            "标记为假设，建议移除或补充证据：\n"
+            + ", ".join(validation["assumed_conclusions"])
+        )
+
     items = validation.get("items", [])
     if items:
+        # 语义校验未通过的项单独列出
+        semantic_fails = [
+            it for it in items
+            if it.get("target_type") == "requirement_semantic"
+        ]
+        if semantic_fails:
+            st.error("🤖 **语义校验未通过**（LLM 判断需求无法从评论中合理推导）：")
+            for it in semantic_fails:
+                st.markdown(
+                    f"- **{it.get('target')}**: {it.get('reason')}"
+                )
+
+        # 全部验证项表格
         df = pd.DataFrame([{
             "对象": it.get("target"),
             "类型": it.get("target_type"),
@@ -446,13 +489,80 @@ def run_pipeline_from_reviews(reviews: list[dict], goal: str,
         st.session_state["pipeline_result"] = result
 
 
+def load_cached_result() -> dict | None:
+    """读取离线缓存 JSON 文件并返回解析后的 dict。
+
+    文件不存在或解析失败时返回 None，不报错不崩溃。
+    返回的 dict 结构与 PipelineResult 的字段一致，可直接用于渲染。
+    """
+    if not CACHED_RESULT_FILE.exists():
+        return None
+    try:
+        with open(CACHED_RESULT_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception:
+        return None
+    return data
+
+
+def _build_pipeline_result_from_cache(data: dict) -> "orchestrator.PipelineResult":
+    """将缓存 dict 构造为 PipelineResult 对象，供结果页渲染复用。"""
+    result = orchestrator.PipelineResult()
+    result.success = True
+
+    meta = data.get("meta", {})
+    result.steps.append(orchestrator.StepResult(
+        name="load_cache", status="success", elapsed=0.0,
+        data={"source": "cached_result_app_839285684.json",
+              "app_id": meta.get("app_id", "839285684"),
+              "generated_at": meta.get("generated_at", "")},
+    ))
+    result.steps.append(orchestrator.StepResult(
+        name="collect_reviews", status="success", elapsed=0.0,
+        data={"cached": True, "count": len(data.get("reviews_raw", []))},
+    ))
+    result.steps.append(orchestrator.StepResult(
+        name="clean_reviews", status="success", elapsed=0.0,
+        data={"cached": True, "count": len(data.get("reviews_clean", []))},
+    ))
+    result.steps.append(orchestrator.StepResult(
+        name="analyze_reviews", status="success", elapsed=0.0,
+        data={"cached": True, "topics": len(data.get("analysis", {}).get("topics", []))},
+    ))
+    result.steps.append(orchestrator.StepResult(
+        name="generate_prd", status="success", elapsed=0.0,
+        data={"cached": True, "reqs": len(data.get("prd", {}).get("requirements", []))},
+    ))
+    result.steps.append(orchestrator.StepResult(
+        name="generate_test_cases", status="success", elapsed=0.0,
+        data={"cached": True, "cases": len(data.get("test_suite", {}).get("test_cases", []))},
+    ))
+    result.steps.append(orchestrator.StepResult(
+        name="validate_traceability", status="success", elapsed=0.0,
+        data={"cached": True, "pass_rate": data.get("validation", {}).get("pass_rate", 0)},
+    ))
+
+    # 填充各分区数据（结构与 PipelineResult 字段一致）
+    result.reviews_raw = data.get("reviews_raw", [])
+    result.reviews_clean = data.get("reviews_clean", [])
+    result.collect_report = data.get("collect_report", {})
+    result.clean_report = data.get("clean_report", {})
+    result.analysis = data.get("analysis", {})
+    result.prd = data.get("prd", {})
+    result.test_suite = data.get("test_suite", {})
+    result.validation = data.get("validation", {})
+    return result
+
+
 # ============================================================
 # 触发
 # ============================================================
 if start_btn and app_url:
+    st.session_state["is_cached"] = False
     run_pipeline_from_url(app_url, analysis_goal, max_pages)
 
 if sample_btn:
+    st.session_state["is_cached"] = False
     if not SAMPLE_FILE.exists():
         st.error(f"样本文件不存在: {SAMPLE_FILE}")
     else:
@@ -487,6 +597,7 @@ if sample_btn:
             st.error(f"样本加载失败: {err}")
 
 if uploaded is not None:
+    st.session_state["is_cached"] = False
     try:
         # 直接走 collector 的导入路径，再走后续步骤
         from io import BytesIO
@@ -499,12 +610,45 @@ if uploaded is not None:
     except Exception as err:  # noqa: BLE001
         st.error(f"文件导入失败: {err}")
 
+if cache_btn:
+    cache_data = load_cached_result()
+    if cache_data is not None:
+        result_obj = _build_pipeline_result_from_cache(cache_data)
+        st.session_state["is_cached"] = True
+        st.session_state["pipeline_result"] = result_obj
+        meta = cache_data.get("meta", {})
+        st.toast(f"已加载离线缓存结果（App {meta.get('app_id', '839285684')}）")
+    else:
+        st.error("缓存文件不存在或加载失败")
+
+
+# ============================================================
+# 自动加载离线缓存（LLM 配置缺失时）
+# ============================================================
+# 仅在首次加载（无 pipeline_result）且无按钮点击时自动加载
+_llm_missing = bool(settings.validate_llm())
+_no_result_yet = st.session_state.get("pipeline_result") is None
+_no_button_clicked = not (start_btn or sample_btn or cache_btn or uploaded is not None)
+
+if _llm_missing and _no_result_yet and _no_button_clicked:
+    cache_data = load_cached_result()
+    if cache_data is not None:
+        result_obj = _build_pipeline_result_from_cache(cache_data)
+        st.session_state["is_cached"] = True
+        st.session_state["pipeline_result"] = result_obj
+
 
 # ============================================================
 # 结果展示
 # ============================================================
 result = st.session_state.get("pipeline_result")
 if result:
+    # 缓存模式提示（显示在结果区最顶部）
+    if st.session_state.get("is_cached"):
+        st.warning(
+            "⚠️ **当前显示缓存示例数据（App ID: 839285684），非实时分析结果。**\n"
+            "请在 .env 中配置 LLM_API_KEY 后即可处理任意 App Store 链接。"
+        )
     st.divider()
     st.subheader("2. 执行步骤总览")
     render_steps_section([s.as_dict() for s in result.steps])

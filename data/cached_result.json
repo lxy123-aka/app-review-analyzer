@@ -4,7 +4,7 @@
     "source": "sample_reviews.json (cached from App Store RSS)",
     "app_id": "1357527742",
     "analysis_goal": "识别用户最关心的功能问题与改进诉求，输出后续版本规划",
-    "note": "此文件为离线演示用缓存结果。面试官能通过此文件审查完整交付物质量。实际使用时可在 UI 中输入任意 App Store 链接重新运行。"
+    "note": "此文件为离线演示用缓存结果。可通过此文件查看完整交付物质量。实际使用时可在 UI 中输入任意 App Store 链接重新运行。"
   },
   "clean_report": {
     "raw_count": 50,
